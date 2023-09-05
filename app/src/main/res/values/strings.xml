@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">iTunesSteedPractice</string>
+
+    <string name="search_fragment_label">Album Search</string>
+    <string name="album_search_hint">Search</string>
+
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="previous">Previous</string>
+</resources>
