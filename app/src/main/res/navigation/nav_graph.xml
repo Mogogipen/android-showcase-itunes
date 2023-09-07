@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.example.itunessteedpractice.FirstFragment"
+        android:name="com.example.itunessteedpractice.view.AlbumSearchFragment"
         android:label="@string/search_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_album_search">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.example.itunessteedpractice.SecondFragment"
+        android:name="com.example.itunessteedpractice.view.SecondFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".view.AlbumSearchFragment">
 
     <EditText
         android:id="@+id/album_title_search"
@@ -22,12 +22,13 @@
         tools:ignore="Autofill" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/album_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
+        android:clipToPadding="false"
         android:orientation="vertical"
         android:paddingTop="8dp"
-        android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
