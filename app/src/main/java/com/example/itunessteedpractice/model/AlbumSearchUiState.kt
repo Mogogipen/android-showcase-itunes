@@ -4,8 +4,8 @@ import androidx.annotation.StringRes
 import com.example.itunessteedpractice.data.Album
 
 data class AlbumSearchUiState(
-    val searchText: String,
-    val albumResults: AlbumSearchState)
+    val searchText: String = "",
+    val albumResults: AlbumSearchState = AlbumSearchState.Success())
 
 sealed class AlbumSearchState {
     data class Success(val albums: List<Album> = emptyList()): AlbumSearchState()

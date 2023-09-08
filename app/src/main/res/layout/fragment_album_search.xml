@@ -8,7 +8,7 @@
     tools:context=".view.AlbumSearchFragment">
 
     <EditText
-        android:id="@+id/album_title_search"
+        android:id="@+id/album_search_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/album_title_search"
+        app:layout_constraintTop_toBottomOf="@+id/album_search_field"
         tools:listitem="@layout/album_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
