@@ -33,7 +33,7 @@ class AlbumViewHolder(private val binding: AlbumItemBinding): ViewHolder(binding
         albumTitle.text = album.title
         artist.text = album.artist
         releaseYear.text = album.releaseYear
-        //TODO: Bind album image
+        albumArt.setImageBitmap(album.albumArt)
     }
 
 }

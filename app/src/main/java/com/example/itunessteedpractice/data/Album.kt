@@ -1,8 +1,10 @@
 package com.example.itunessteedpractice.data
 
+import android.graphics.Bitmap
+
 data class Album(
     val title: String,
     val artist: String,
     val releaseYear: String,
-    //TODO add more data
+    val albumArt: Bitmap
 )
