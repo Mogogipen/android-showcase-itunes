@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.itunessteedpractice.R
 import com.example.itunessteedpractice.appContext
 import com.example.itunessteedpractice.data.Album
+import com.example.itunessteedpractice.datasource.AlbumDataSource
 import com.example.itunessteedpractice.model.AlbumSearchState
 import com.example.itunessteedpractice.model.AlbumSearchUiState
 import kotlinx.coroutines.CancellationException
@@ -32,8 +33,7 @@ import kotlinx.parcelize.Parcelize
 
 class AlbumSearchViewModel(private val savedStateHandle: SavedStateHandle): ViewModel() {
 
-    //TODO Remove once we start actually getting album art.
-    private val genericImage get() = AppCompatResources.getDrawable(appContext, R.drawable.ic_launcher_foreground)?.toBitmap()
+    private val albumDataSource = AlbumDataSource()
 
     private val searchErrorMessage get() = appContext.getString(R.string.search_error_message)
 
@@ -62,12 +62,7 @@ class AlbumSearchViewModel(private val savedStateHandle: SavedStateHandle): View
     private suspend fun search(searchText: String) = withContext(IO) {
         searchOperationFlow.emit(AlbumSearchState.Loading)
         try {
-            //TODO: Search for albums
-            delay(2000)
-            if (System.currentTimeMillis() % 2 == 0L) {
-                throw Exception(searchText)
-            }
-            val result = listOf(Album("Title", "artist", "2000", genericImage!!))
+            val result = albumDataSource.searchByName(searchText)
             searchOperationFlow.emit(AlbumSearchState.Success(result))
         } catch (_: CancellationException) {
             searchOperationFlow.emit(AlbumSearchState.Success())
