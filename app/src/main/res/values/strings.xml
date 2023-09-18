@@ -7,4 +7,5 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="previous">Previous</string>
     <string name="search_error_message">Search could not be performed</string>
+    <string name="album_search_error">Could not get result</string>
 </resources>

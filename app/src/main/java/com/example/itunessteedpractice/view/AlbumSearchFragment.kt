@@ -75,23 +75,34 @@ class AlbumSearchFragment: Fragment() {
 
     private fun displayAlbumList(albumResults: AlbumSearchState.Success) {
         hideLoading()
+        hideError()
         albumAdapter.submitList(albumResults.albums)
     }
 
     private fun displayError() {
         hideLoading()
-        AlertDialog.Builder(requireContext())
-                .setTitle("Error")
-                .setMessage("Could not get result")
-                .setNeutralButton("OK", null)
-                .show()
+        albumAdapter.submitList(emptyList())
+        showError()
+
+    }
+
+    private fun displayLoading() {
+        showLoading()
+    }
+
+    private fun hideError() {
+        binding.errorLabel.visibility = View.GONE
+    }
+
+    private fun showError() {
+        binding.errorLabel.visibility = View.VISIBLE
     }
 
     private fun hideLoading() {
         binding.loadingIndicator.visibility = View.GONE
     }
 
-    private fun displayLoading() {
+    private fun showLoading() {
         binding.loadingIndicator.visibility = View.VISIBLE
     }
 
