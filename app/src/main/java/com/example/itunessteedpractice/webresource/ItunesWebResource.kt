@@ -3,18 +3,27 @@ package com.example.itunessteedpractice.webresource
 import com.example.itunessteedpractice.gson
 import com.example.itunessteedpractice.okHttpClient
 import com.example.itunessteedpractice.webresource.response.AlbumSearchResponse
-import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.Response
 
 class ItunesWebResource {
 
     suspend fun albumSearch(searchTerm: String): AlbumSearchResponse = withContext(IO) {
+        requestAlbums(searchTerm)
+    }
+
+    private fun requestAlbums(searchTerm: String): AlbumSearchResponse {
         val response = okHttpClient.newCall(buildRequest(searchTerm))
                 .execute()
-        gson.fromJson(response.body.toString(), AlbumSearchResponse::class.java)
+        return response.processResponse()
+    }
+
+    private fun Response.processResponse(): AlbumSearchResponse {
+        return body?.byteStream()?.reader()?.use { reader ->
+            gson.fromJson(reader, AlbumSearchResponse::class.java)
+        } ?: AlbumSearchResponse()
     }
 
     private fun buildRequest(searchTerm: String) = Request.Builder()
