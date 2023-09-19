@@ -5,7 +5,6 @@ import com.example.itunessteedpractice.data.Album
 import com.example.itunessteedpractice.webresource.ImageWebResource
 import com.example.itunessteedpractice.webresource.ItunesWebResource
 import com.example.itunessteedpractice.webresource.response.AlbumResponseItem
-import com.example.itunessteedpractice.webresource.response.AlbumSearchResponse
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -29,10 +28,16 @@ class AlbumDataSource {
     private suspend fun attachImagesToAlbums(
         albumResults: List<AlbumResponseItem>
     ): List<Album> = coroutineScope {
-        albumResults.map { async { it to imageWebResource.getImage(it.artworkUrl60) } }
+        albumResults.map { async { it to it.fetchImage() } }
                 .awaitAll()
                 .toMap()
                 .flatMap { (albumResponseItem, image) -> listOf(Album(albumResponseItem, image)) }
+    }
+
+    private suspend fun AlbumResponseItem.fetchImage(): Bitmap {
+        //TODO: Store images locally and create a table to associate the image URL with a local file location.
+        // This is mostly just to showcase the ability to use local storage.
+        return imageWebResource.getImage(artworkUrl60)
     }
 
 }
