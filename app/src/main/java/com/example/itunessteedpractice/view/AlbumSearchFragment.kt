@@ -4,15 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.itunessteedpractice.data.Album
 import com.example.itunessteedpractice.databinding.FragmentAlbumSearchBinding
 import com.example.itunessteedpractice.model.AlbumSearchState
 import com.example.itunessteedpractice.model.AlbumSearchUiState
@@ -37,7 +35,7 @@ class AlbumSearchFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAlbumSearchBinding.inflate(inflater, container, false)
-        binding.albumList.adapter = AlbumAdapter()
+        binding.albumList.adapter = AlbumAdapter { album -> selectAlbum(album) }
         return binding.root
     }
 
@@ -71,6 +69,15 @@ class AlbumSearchFragment: Fragment() {
                 text?.toString()?.let { viewModel.updateSearchText(it) }
             }
         }
+    }
+
+    private fun selectAlbum(album: Album) {
+        viewModel.selectAlbum(album)
+        openDetails()
+    }
+
+    private fun openDetails() {
+        //TODO
     }
 
     private fun displayAlbumList(albumResults: AlbumSearchState.Success) {

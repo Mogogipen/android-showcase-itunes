@@ -15,10 +15,13 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:hint="@string/album_search_hint"
+        android:textSize="24sp"
         android:inputType="text|textNoSuggestions"
+        android:maxLength="100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="488dp"
         tools:ignore="Autofill" />
 
     <androidx.slidingpanelayout.widget.SlidingPaneLayout
