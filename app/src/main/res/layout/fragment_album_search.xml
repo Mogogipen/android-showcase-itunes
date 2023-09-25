@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/album_search_error"
                 android:textColor="@color/error_text"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
