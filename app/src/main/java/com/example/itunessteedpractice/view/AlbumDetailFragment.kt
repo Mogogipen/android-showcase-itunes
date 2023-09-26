@@ -27,7 +27,7 @@ class AlbumDetailFragment: Fragment() {
     private val sharedViewModel: SharedAlbumSearchViewModel by activityViewModels()
     private val viewModel: AlbumDetailViewModel by viewModels()
 
-    private val adapter = binding.songList.adapter as SongAdapter
+    private val adapter get() = binding.songList.adapter as SongAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
