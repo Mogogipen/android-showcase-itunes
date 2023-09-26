@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.itunessteedpractice.R
 import com.example.itunessteedpractice.appContext
-import com.example.itunessteedpractice.data.Album
 import com.example.itunessteedpractice.datasource.AlbumDataSource
 import com.example.itunessteedpractice.model.AlbumSearchState
 import com.example.itunessteedpractice.model.AlbumSearchUiState
@@ -23,10 +22,7 @@ import kotlinx.coroutines.plus
 import kotlinx.coroutines.withContext
 import kotlinx.parcelize.Parcelize
 
-class AlbumSearchViewModel(
-    private val savedStateHandle: SavedStateHandle,
-    private val sharedViewModel: SharedAlbumSearchViewModel
-): ViewModel() {
+class AlbumSearchViewModel(private val savedStateHandle: SavedStateHandle): ViewModel() {
 
     private val albumDataSource = AlbumDataSource()
 
@@ -54,10 +50,6 @@ class AlbumSearchViewModel(
         updateUserInput(UserInput(searchText)) //If there's ever any more user input, we would use copy()
     }
 
-    fun selectAlbum(album: Album) {
-        sharedViewModel.selectedAlbum = album
-    }
-
     private suspend fun search(searchText: String) = withContext(IO) {
         searchOperationFlow.emit(AlbumSearchState.Loading)
         try {
@@ -75,7 +67,6 @@ class AlbumSearchViewModel(
     private data class UserInput(val searchText: String = ""): Parcelable
 
     companion object {
-        //TODO create factory to inject the shared view model
         private const val USER_INPUT = "userInput"
     }
 

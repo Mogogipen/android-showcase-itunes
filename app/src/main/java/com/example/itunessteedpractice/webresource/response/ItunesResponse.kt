@@ -1,12 +1,12 @@
 package com.example.itunessteedpractice.webresource.response
 
-data class AlbumSearchResponse(
-    val resultCount: Int = 0,
-    val results: List<AlbumResponseItem> = emptyList()
+data class ItunesResponse(
+    val resultCount: Long = 0,
+    val results: List<ItunesResponseItem> = emptyList()
 )
 
-data class AlbumResponseItem(
-    val wrapperType: String = "",
+data class ItunesResponseItem(
+    val wrapperType: String,
     val collectionType: String = "",
     val artistId: Long = 0,
     val collectionId: Long = 0,
@@ -16,6 +16,7 @@ data class AlbumResponseItem(
     val collectionCensoredName: String = "",
     val artistViewUrl: String = "",
     val collectionViewUrl: String = "",
+    val artworkUrl30: String = "",
     val artworkUrl60: String = "",
     val artworkUrl100: String = "",
     val collectionPrice: Double = 0.0,
@@ -25,5 +26,18 @@ data class AlbumResponseItem(
     val country: String = "",
     val currency: String = "",
     val releaseDate: String = "",
-    val primaryGenreName: String = ""
+    val primaryGenreName: String = "",
+    val kind: String = "",
+    val trackId: Long = 0,
+    val trackName: String = "",
+    val trackCensoredName: String = "",
+    val trackViewUrl: String = "",
+    val previewUrl: String = "",
+    val trackPrice: Double = 0.0,
+    val trackExplicitness: String = "",
+    val discCount: Long = 0,
+    val discNumber: Long = 0,
+    val trackNumber: Long = 0,
+    val trackTimeMillis: Long = 0,
+    val isStreamable: Boolean = false
 )

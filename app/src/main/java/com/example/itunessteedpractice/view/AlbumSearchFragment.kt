@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import com.example.itunessteedpractice.databinding.FragmentAlbumSearchBinding
 import com.example.itunessteedpractice.model.AlbumSearchState
 import com.example.itunessteedpractice.model.AlbumSearchUiState
 import com.example.itunessteedpractice.viewmodel.AlbumSearchViewModel
+import com.example.itunessteedpractice.viewmodel.SharedAlbumSearchViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -26,6 +28,7 @@ class AlbumSearchFragment: Fragment() {
     private var _binding: FragmentAlbumSearchBinding? = null
     private val binding get() = _binding!!
 
+    private val sharedViewModel: SharedAlbumSearchViewModel by activityViewModels()
     private val viewModel: AlbumSearchViewModel by viewModels()
 
     private val albumAdapter get() = binding.albumList.adapter as AlbumAdapter
@@ -72,7 +75,7 @@ class AlbumSearchFragment: Fragment() {
     }
 
     private fun selectAlbum(album: Album) {
-        viewModel.selectAlbum(album)
+        sharedViewModel.selectAlbum(album)
         openDetails()
     }
 

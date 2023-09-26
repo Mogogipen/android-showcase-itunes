@@ -19,10 +19,8 @@ class AlbumDetailFragment: Fragment() {
     private var _binding: FragmentAlbumDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: AlbumDetailViewModel by viewModels(
-        { this },
-        { AlbumDetailViewModel.buildExtras(activityViewModels<SharedAlbumSearchViewModel>().value) },
-        { AlbumDetailViewModel.Factory })
+    private val sharedViewModel: SharedAlbumSearchViewModel by activityViewModels()
+    private val viewModel: AlbumDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
