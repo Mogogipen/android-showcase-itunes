@@ -5,8 +5,6 @@ import com.example.itunessteedpractice.data.Album
 import com.example.itunessteedpractice.data.Song
 import com.example.itunessteedpractice.database.AlbumSearchDatabase
 import com.example.itunessteedpractice.webresource.ItunesWebResource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.lastOrNull
 
 class SongDataSource {
 
@@ -16,8 +14,8 @@ class SongDataSource {
         //TODO select album
     }
 
-    suspend fun getSongsForAlbum(album: Album): Flow<List<Song>> {
-        val noSongsInDb = songDao.getSongs(album.id).lastOrNull().isNullOrEmpty()
+    suspend fun getSongsForAlbum(album: Album): List<Song> {
+        val noSongsInDb = songDao.getSongs(album.id).lastOrNull() == null
         if (noSongsInDb) {
             val fetchResponse = ItunesWebResource.fetchSongsForAlbum(album)
             val songs = fetchResponse.results

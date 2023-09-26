@@ -8,4 +8,5 @@
     <string name="previous">Previous</string>
     <string name="search_error_message">Search could not be performed</string>
     <string name="album_search_error">Could not get results</string>
+    <string name="album_detail_error">Unable to get album details</string>
 </resources>

@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import okhttp3.Request
 
-class ImageWebResource {
+object ImageWebResource {
 
     suspend fun getImage(imageUrl: String): Bitmap = withContext(IO) {
         val response = okHttpClient.newCall(buildRequest(imageUrl))

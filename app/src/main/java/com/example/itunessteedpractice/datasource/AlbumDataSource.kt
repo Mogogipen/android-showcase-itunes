@@ -13,8 +13,6 @@ import kotlinx.coroutines.withContext
 
 class AlbumDataSource {
 
-    private val imageWebResource = ImageWebResource()
-
     suspend fun searchByName(albumSearchText: String): List<Album> = withContext(IO) {
         searchForAlbumsWithAlbumArt(albumSearchText)
     }
@@ -35,7 +33,7 @@ class AlbumDataSource {
     }
 
     private suspend fun ItunesResponseItem.fetchImage(): Bitmap {
-        return imageWebResource.getImage(artworkUrl60)
+        return ImageWebResource.getImage(artworkUrl60)
     }
 
     companion object {

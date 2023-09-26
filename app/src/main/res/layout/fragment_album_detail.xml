@@ -60,8 +60,8 @@
                 app:layout_constraintTop_toTopOf="@+id/album_artist"
                 tools:text="1969" />
 
-            <ListView
-                android:id="@+id/recyclerView"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/song_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -83,10 +83,11 @@
             tools:visibility="visible" />
 
         <TextView
+            android:id="@+id/detail_error_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            android:text="Unable to get album details"
+            android:text="@string/album_detail_error"
             android:textColor="@color/error_text"
             android:layout_gravity="center"
             android:textSize="24sp"

@@ -9,6 +9,7 @@ data class Album(
     val artist: String,
     val releaseYear: String,
     val albumArt: Bitmap,
+    val largeImageUrl: String,
     val id: Long
 ) {
     constructor(albumResponseItem: ItunesResponseItem, albumArt: Bitmap): this(
@@ -16,5 +17,7 @@ data class Album(
         albumResponseItem.artistName,
         Dates.yearFromTimeString(albumResponseItem.releaseDate),
         albumArt,
-        albumResponseItem.collectionId)
+        albumResponseItem.artworkUrl100,
+        albumResponseItem.collectionId
+    )
 }
