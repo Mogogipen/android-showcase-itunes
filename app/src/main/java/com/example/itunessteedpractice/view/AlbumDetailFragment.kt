@@ -43,7 +43,7 @@ class AlbumDetailFragment: Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch {
                     sharedViewModel.selectedAlbumState.collect { album ->
-                        viewModel.selectAlbum(album ?: throw IllegalStateException())
+                        album?.let { viewModel.selectAlbum(it) }
                     }
                 }
                 launch {

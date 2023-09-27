@@ -1,12 +1,13 @@
 package com.example.itunessteedpractice.model
 
 import android.graphics.Bitmap
+import com.example.itunessteedpractice.Bitmaps
 import com.example.itunessteedpractice.data.Album
 import com.example.itunessteedpractice.data.Song
 
 sealed class AlbumDetailUiState {
     data class Success(
-        val largeAlbumArt: Bitmap = Bitmap.createBitmap(0, 0, Bitmap.Config.ALPHA_8),
+        val largeAlbumArt: Bitmap = Bitmaps.getBlankBitmap(),
         val albumTitle: String = "",
         val albumArtist: String = "",
         val albumReleaseYear: String = "",

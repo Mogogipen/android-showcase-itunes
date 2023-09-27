@@ -6,7 +6,7 @@ data class ItunesResponse(
 )
 
 data class ItunesResponseItem(
-    val wrapperType: String,
+    val wrapperType: String = "",
     val collectionType: String = "",
     val artistId: Long = 0,
     val collectionId: Long = 0,

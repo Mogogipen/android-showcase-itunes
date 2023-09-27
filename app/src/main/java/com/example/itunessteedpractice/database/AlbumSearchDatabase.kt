@@ -12,7 +12,7 @@ abstract class AlbumSearchDatabase: RoomDatabase() {
     abstract fun songDao(): SongDao
 
     companion object {
-        private const val DATABASE_NAME = "album_search_database"
+        private const val DATABASE_NAME = "album-search-database"
         @Volatile private var instance: AlbumSearchDatabase? = null
 
         fun getInstance(context: Context): AlbumSearchDatabase =
