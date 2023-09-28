@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.example.itunessteedpractice.data.Album
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class SharedAlbumSearchViewModel(private val savedStateHandle: SavedStateHandle): ViewModel() {
+class AlbumSearchRouter(private val savedStateHandle: SavedStateHandle): ViewModel() {
 
     // val selectedAlbumState = savedStateHandle.getStateFlow<Long?>(SELECTED_ALBUM_KEY, null)
     // private fun updateSelectedAlbum(albumId: Long) { savedStateHandle[SELECTED_ALBUM_KEY] = albumId }

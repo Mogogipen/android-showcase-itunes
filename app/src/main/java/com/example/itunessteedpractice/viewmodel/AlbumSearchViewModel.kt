@@ -1,45 +1,42 @@
 package com.example.itunessteedpractice.viewmodel
 
 import android.os.Parcelable
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.itunessteedpractice.R
 import com.example.itunessteedpractice.appContext
-import com.example.itunessteedpractice.datasource.AlbumDataSource
 import com.example.itunessteedpractice.model.AlbumSearchState
 import com.example.itunessteedpractice.model.AlbumSearchUiState
-import kotlinx.coroutines.CancellationException
+import com.example.itunessteedpractice.operation.AlbumSearchOperation
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.plus
-import kotlinx.coroutines.withContext
 import kotlinx.parcelize.Parcelize
 
 class AlbumSearchViewModel(private val savedStateHandle: SavedStateHandle): ViewModel() {
 
-    private val albumDataSource = AlbumDataSource()
+    private val albumSearchOperation = AlbumSearchOperation()
 
     private val searchErrorMessage get() = appContext.getString(R.string.search_error_message)
 
     private fun updateUserInput(input: UserInput) { savedStateHandle[USER_INPUT] = input }
     private val userInputFlow = savedStateHandle.getStateFlow(USER_INPUT, UserInput()).also { flow ->
         viewModelScope.launch {
-            flow.collectLatest { input ->
-                if (input.searchText.isNotBlank()) search(input.searchText)
+            flow.collect { input ->
+                if (input.searchText.isNotBlank()) albumSearchOperation.searchForAlbums(input.searchText)
             }
         }
     }
-    private val searchOperationFlow = MutableStateFlow<AlbumSearchState>(AlbumSearchState.Success())
+    private val searchOperationFlow = albumSearchOperation.state
 
     val uiState = combine(userInputFlow, searchOperationFlow) { userInput, searchState ->
-        AlbumSearchUiState(userInput.searchText, searchState)
+        AlbumSearchUiState(
+            userInput.searchText,
+            searchState.asAlbumSearchState())
     }.stateIn(
         viewModelScope + IO,
         SharingStarted.WhileSubscribed(),
@@ -47,19 +44,15 @@ class AlbumSearchViewModel(private val savedStateHandle: SavedStateHandle): View
     )
 
     fun updateSearchText(searchText: String) {
-        updateUserInput(UserInput(searchText)) //If there's ever any more user input, we would use copy()
+        updateUserInput(UserInput(searchText))
+
     }
 
-    private suspend fun search(searchText: String) = withContext(IO) {
-        searchOperationFlow.emit(AlbumSearchState.Loading)
-        try {
-            val result = albumDataSource.searchByName(searchText)
-            searchOperationFlow.emit(AlbumSearchState.Success(result))
-        } catch (_: CancellationException) {
-            searchOperationFlow.emit(AlbumSearchState.Success())
-        } catch (e: Exception) {
-            Log.e(AlbumSearchViewModel::class.simpleName, "An error!", e)
-            searchOperationFlow.emit(AlbumSearchState.Error(searchErrorMessage))
+    private fun AlbumSearchOperation.State.asAlbumSearchState(): AlbumSearchState {
+        return when (this) {
+            is AlbumSearchOperation.State.Completed -> AlbumSearchState.Success(albumList)
+            AlbumSearchOperation.State.Failed       -> AlbumSearchState.Error(searchErrorMessage)
+            AlbumSearchOperation.State.Running      -> AlbumSearchState.Loading
         }
     }
 

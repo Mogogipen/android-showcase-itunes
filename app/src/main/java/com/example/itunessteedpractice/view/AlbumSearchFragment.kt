@@ -15,8 +15,8 @@ import com.example.itunessteedpractice.data.Album
 import com.example.itunessteedpractice.databinding.FragmentAlbumSearchBinding
 import com.example.itunessteedpractice.model.AlbumSearchState
 import com.example.itunessteedpractice.model.AlbumSearchUiState
+import com.example.itunessteedpractice.viewmodel.AlbumSearchRouter
 import com.example.itunessteedpractice.viewmodel.AlbumSearchViewModel
-import com.example.itunessteedpractice.viewmodel.SharedAlbumSearchViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -28,7 +28,7 @@ class AlbumSearchFragment: Fragment() {
     private var _binding: FragmentAlbumSearchBinding? = null
     private val binding get() = _binding!!
 
-    private val sharedViewModel: SharedAlbumSearchViewModel by activityViewModels()
+    private val sharedViewModel: AlbumSearchRouter by activityViewModels()
     private val viewModel: AlbumSearchViewModel by viewModels()
 
     private val albumAdapter get() = binding.albumList.adapter as AlbumAdapter

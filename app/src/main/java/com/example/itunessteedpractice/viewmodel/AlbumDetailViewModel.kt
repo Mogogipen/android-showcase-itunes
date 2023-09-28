@@ -2,6 +2,7 @@ package com.example.itunessteedpractice.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.itunessteedpractice.R
 import com.example.itunessteedpractice.appContext
@@ -17,7 +18,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class AlbumDetailViewModel: ViewModel() {
+class AlbumDetailViewModel(
+    val sharedViewModel: AlbumSearchRouter
+): ViewModel() {
 
     private val songDataSource = SongDataSource()
 
@@ -56,5 +59,10 @@ class AlbumDetailViewModel: ViewModel() {
         }
     }
 
+    class Factory(private val sharedViewModel: AlbumSearchRouter): ViewModelProvider.Factory {
+        override fun <T: ViewModel> create(modelClass: Class<T>): T {
+            return AlbumDetailViewModel(sharedViewModel) as T
+        }
+    }
 
 }

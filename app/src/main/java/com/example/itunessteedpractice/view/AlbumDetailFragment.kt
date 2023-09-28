@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.itunessteedpractice.databinding.FragmentAlbumDetailBinding
 import com.example.itunessteedpractice.model.AlbumDetailUiState
 import com.example.itunessteedpractice.viewmodel.AlbumDetailViewModel
-import com.example.itunessteedpractice.viewmodel.SharedAlbumSearchViewModel
+import com.example.itunessteedpractice.viewmodel.AlbumSearchRouter
 import kotlinx.coroutines.launch
 
 /**
@@ -24,8 +24,10 @@ class AlbumDetailFragment: Fragment() {
     private var _binding: FragmentAlbumDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val sharedViewModel: SharedAlbumSearchViewModel by activityViewModels()
-    private val viewModel: AlbumDetailViewModel by viewModels()
+    private val sharedViewModel: AlbumSearchRouter by activityViewModels()
+    private val viewModel: AlbumDetailViewModel by viewModels {
+        AlbumDetailViewModel.Factory(activityViewModels<AlbumSearchRouter>().value)
+    }
 
     private val adapter get() = binding.songList.adapter as SongAdapter
 
