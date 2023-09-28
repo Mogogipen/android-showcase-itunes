@@ -3,7 +3,6 @@ package com.example.itunessteedpractice.operation
 import android.util.Log
 import com.example.itunessteedpractice.data.Album
 import com.example.itunessteedpractice.datasource.AlbumDataSource
-import com.example.itunessteedpractice.viewmodel.AlbumSearchViewModel
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Job
@@ -43,7 +42,7 @@ class AlbumSearchOperation {
             state.emit(State.Completed(result))
         } catch (_: CancellationException) { // ignore and allow cancellation
         } catch (e: Exception) {
-            Log.e(AlbumSearchViewModel::class.simpleName, "An error!", e)
+            Log.e(AlbumSearchOperation::class.simpleName, "An error!", e)
             state.emit(State.Failed)
         }
     }

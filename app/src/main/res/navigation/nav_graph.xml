@@ -3,26 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/SearchFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/SearchFragment"
         android:name="com.example.itunessteedpractice.view.AlbumSearchFragment"
         android:label="@string/search_fragment_label"
         tools:layout="@layout/fragment_album_search">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/DetailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/DetailFragment"
         android:name="com.example.itunessteedpractice.view.AlbumDetailFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_album_detail">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/SearchFragment" />
     </fragment>
 </navigation>

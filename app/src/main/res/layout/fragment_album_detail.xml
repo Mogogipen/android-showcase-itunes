@@ -14,13 +14,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/album_detail_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/album_art"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:importantForAccessibility="no"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +33,10 @@
                 android:id="@+id/album_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
+                android:gravity="center"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -42,9 +47,9 @@
                 android:id="@+id/album_artist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/album_release_year"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/album_title"
                 tools:text="Led Zeppelin" />
@@ -53,24 +58,23 @@
                 android:id="@+id/album_release_year"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/album_artist"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/album_artist"
                 app:layout_constraintTop_toTopOf="@+id/album_artist"
                 tools:text="1969" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/song_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/album_artist"
-                app:layout_constraintVertical_bias="1.0"
-                tools:listitem="@layout/song_item"/>
+                tools:listitem="@layout/song_item" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

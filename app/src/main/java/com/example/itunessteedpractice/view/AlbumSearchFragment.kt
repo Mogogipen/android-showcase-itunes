@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
+import com.example.itunessteedpractice.R
 import com.example.itunessteedpractice.data.Album
 import com.example.itunessteedpractice.databinding.FragmentAlbumSearchBinding
 import com.example.itunessteedpractice.model.AlbumSearchState
@@ -80,7 +82,7 @@ class AlbumSearchFragment: Fragment() {
     }
 
     private fun openDetails() {
-        //TODO
+        findNavController().navigate(R.id.DetailFragment)
     }
 
     private fun displayAlbumList(albumResults: AlbumSearchState.Success) {
