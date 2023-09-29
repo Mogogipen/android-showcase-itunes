@@ -54,7 +54,7 @@ class AlbumDetailViewModel(
         } catch (_: CancellationException) {
             mutableUiState.emit(AlbumDetailUiState.Success())
         } catch (e: Exception) {
-            Log.e(AlbumDetailViewModel::class.simpleName, "Error occurred fetching songs!!")
+            Log.e(AlbumDetailViewModel::class.simpleName, "Error occurred fetching songs!!", e)
             mutableUiState.emit(AlbumDetailUiState.Error(detailErrorMessage))
         }
     }

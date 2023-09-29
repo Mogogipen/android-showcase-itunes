@@ -36,6 +36,7 @@ class AlbumDetailFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAlbumDetailBinding.inflate(inflater, container, false)
+        binding.songList.adapter = SongAdapter()
         return binding.root
     }
 
@@ -113,7 +114,7 @@ class AlbumDetailFragment: Fragment() {
             albumArtist.text = uiState.albumArtist
             albumReleaseYear.text = uiState.albumReleaseYear
         }
-        binding.songList.adapter = SongAdapter(uiState.songList)
+        adapter.submitList(uiState.songList)
     }
 
     override fun onDestroyView() {
